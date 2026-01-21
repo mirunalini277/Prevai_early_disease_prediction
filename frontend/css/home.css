@@ -7,7 +7,12 @@ body {
 /* HERO */
 .hero-section {
   height: 90vh;
-  background: #f8f9fa;
+  background-image: url("https://images.unsplash.com/photo-1576091160550-2173dba999ef");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* SCROLL EFFECT */
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,28 +28,60 @@ body {
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .hero-content p {
   font-size: 18px;
-  color: #555;
+  color: #f1f3f5;
 }
+
 
 /* INFO SECTION */
-.info-section {
-  padding: 70px 0;
-  background: #ffffff;
+.glass-section {
+  background: linear-gradient(180deg, #f0f7ff, #ffffff);
+  padding: 90px 0;
 }
 
-.info-section h4 {
-  font-weight: 600;
-  margin-bottom: 15px;
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 42px 30px;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.078);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.info-section p {
-  color: #555;
-  font-size: 15px;
+.glass-card h4 {
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
 }
+
+.glass-card p {
+  color: #000000;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 65px rgba(13, 19, 40, 0.28);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-attachment: scroll;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+  }
+}
+
 
 /* IMAGE SCROLL SECTIONS */
 .image-section {
