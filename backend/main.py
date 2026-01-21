@@ -1,32 +1,20 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 
-from backend.database import SessionLocal
-from backend.models import User
+from backend.routes import (
+    auth_routes,
+    hospital_routes,
+    ministry_routes,
+    press_routes
+)
 
 app = FastAPI(title="PrevAI Backend")
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Register all routers
+app.include_router(auth_routes.router)
+app.include_router(hospital_routes.router)
+app.include_router(ministry_routes.router)
+app.include_router(press_routes.router)
 
 @app.get("/")
 def root():
     return {"status": "Backend running"}
-
-@app.post("/login")
-def login(email: str, password: str, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.email == email).first()
-
-    if not user or user.password != password:
-        return {"status": "error", "message": "Invalid credentials"}
-
-    return {
-        "status": "success",
-        "role": user.role,
-        "email": user.email
-    }

@@ -3,7 +3,7 @@ import os
 import shutil
 import pandas as pd
 
-from ml.ml_engine import run_analysis
+from backend.ml.ml_engine import run_analysis
 
 router = APIRouter(prefix="/hospital")
 
