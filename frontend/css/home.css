@@ -1,17 +1,48 @@
+/* ==============================
+   GLOBAL – GOVT STYLE BASE
+============================== */
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #1c1c1c;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1f2937; /* dark slate */
+  background-color: #f8f9fa;
 }
 
-/* HERO */
+/* Headings */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ==============================
+   NAVBAR (Handled mostly by Bootstrap)
+============================== */
+.navbar-brand {
+  font-size: 17px;
+  letter-spacing: 0.3px;
+}
+
+.nav-link {
+  font-size: 14.5px;
+  color: #1f2937 !important;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+}
+
+/* ==============================
+   HERO SECTION – OFFICIAL LOOK
+============================== */
 .hero-section {
-  height: 90vh;
+  height: 85vh;
   background-image: url("https://images.unsplash.com/photo-1576091160550-2173dba999ef");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* SCROLL EFFECT */
 
   display: flex;
   align-items: center;
@@ -20,75 +51,60 @@ body {
 }
 
 .hero-content {
-  max-width: 800px;
-  text-align: center;
+  max-width: 820px;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 40px 35px;
+  border-radius: 4px;
 }
 
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: #ffffff;
 }
 
 .hero-content p {
-  font-size: 18px;
-  color: #f1f3f5;
+  font-size: 16px;
+  color: #e5e7eb;
 }
 
-
-/* INFO SECTION */
+/* ==============================
+   INFO SECTION (NO GLASS EFFECT)
+============================== */
 .glass-section {
-  background: linear-gradient(180deg, #f0f7ff, #ffffff);
-  padding: 90px 0;
+  background: #ffffff;
+  padding: 70px 0;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 18px;
-  padding: 42px 30px;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 30px 24px;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.078);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .glass-card h4 {
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 16px;
+  font-size: 17px;
+  margin-bottom: 10px;
+  color: #0f172a;
 }
 
 .glass-card p {
-  color: #000000;
-  font-size: 15.5px;
-  line-height: 1.7;
+  font-size: 14.5px;
+  color: #374151;
 }
 
-.glass-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 65px rgba(13, 19, 40, 0.28);
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    background-attachment: scroll;
-  }
-
-  .hero-content h1 {
-    font-size: 34px;
-  }
-}
-
-
-/* IMAGE SCROLL SECTIONS */
+/* ==============================
+   IMAGE SCROLL SECTIONS
+============================== */
 .image-section {
-  height: 90vh;
+  height: 80vh;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,53 +119,123 @@ body {
 }
 
 .image-overlay {
-  background: rgba(255, 255, 255, 0.85);
-  padding: 50px;
-  max-width: 700px;
+  background: #ffffff;
+  padding: 35px 40px;
+  max-width: 720px;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
 }
 
 .image-overlay h2 {
-  font-size: 36px;
-  margin-bottom: 15px;
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
 .image-overlay p {
-  font-size: 17px;
-  color: #444;
+  font-size: 15px;
+  color: #374151;
 }
 
-/* FOOTER */
+/* ==============================
+   FOOTER – GOVT STYLE
+============================== */
 .footer {
-  background: #f1f3f5;
+  background: #e9ecef;
   text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #555;
-<<<<<<< HEAD
+  padding: 18px;
+  font-size: 13.5px;
+  color: #495057;
 }
-=======
-}
-/* DASHBOARD BOX STYLE */
+
+/* ==============================
+   DASHBOARD BOXES
+============================== */
 .dashboard-box {
   background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 25px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 22px;
   height: 100%;
 }
 
 .dashboard-box h5 {
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
-.status-box {
-  background-color: #e7f6ff;
-  border: 1px solid #b6e2f2;
-  padding: 15px;
-  border-radius: 6px;
-  margin-top: 15px;
+.dashboard-box p,
+.dashboard-box li {
+  font-size: 14px;
+  color: #374151;
 }
->>>>>>> 32e3c12d6151f583eedfe8547c4cc671e401fa03
+
+/* Status box */
+.status-box {
+  background-color: #f1f8ff;
+  border: 1px solid #b6d4fe;
+  padding: 14px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* ==============================
+   TABLES (MINISTRY DASHBOARD)
+============================== */
+.table th {
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f8f9fa;
+}
+
+.table td {
+  font-size: 14px;
+}
+
+/* ==============================
+   FORMS
+============================== */
+.form-label,
+label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-control,
+.form-select {
+  font-size: 14px;
+}
+
+/* ==============================
+   BUTTONS (SUBTLE, OFFICIAL)
+============================== */
+.btn {
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.btn-success {
+  background-color: #198754;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-outline-primary {
+  border-width: 1.5px;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 30px;
+  }
+
+  .image-section {
+    background-attachment: scroll;
+  }
+}
