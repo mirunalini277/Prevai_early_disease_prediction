@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Ministry Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="index.html">
+      PrevAI – Disease Outbreak Early Warning
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="press.html">Press Releases</a>
+        </li>
+      </ul>
+
+      <a href="login.html" class="btn btn-light rounded-circle">
+        🔐
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-4">
+  <h3>District-wise Outbreak Status</h3>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Region</th>
+        <th>Reported</th>
+        <th>Predicted</th>
+        <th>Risk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Chennai</td>
+        <td>120</td>
+        <td>85</td>
+        <td class="text-danger">High</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-danger">Release Press Update</button>
+</div>
+
+</body>
+</html>
