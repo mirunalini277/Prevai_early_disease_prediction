@@ -1,0 +1,4 @@
+date,city,patient_count,icu_occupancy,temp,humidity,pressure,rain
+2024-01-01,Delhi,120,35,24.0,65,1013,0
+2024-01-02,Delhi,135,40,24.0,65,1013,0
+2024-01-03,Delhi,150,45,24.0,65,1013,0
