@@ -1,12 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = "sqlite:///backend/prevai.db"
+DATABASE_URL = "mysql+pymysql://root:Miru%403993@localhost:3306/myapp"
 
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False}
-)
+
+engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(
     autocommit=False,
