@@ -91,3 +91,24 @@ body {
   font-size: 14px;
   color: #555;
 }
+/* DASHBOARD BOX STYLE */
+.dashboard-box {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px;
+  height: 100%;
+}
+
+.dashboard-box h5 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.status-box {
+  background-color: #e7f6ff;
+  border: 1px solid #b6e2f2;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
