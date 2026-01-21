@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="index.html">
@@ -37,28 +37,64 @@
 
 
 <div class="container mt-4">
-  <h3>District-wise Outbreak Status</h3>
 
-  <table class="table table-bordered">
+  <!-- SECTION 1: SURVEILLANCE -->
+  <h3>Surveillance Dashboard</h3>
+
+  <table class="table table-bordered mt-2">
     <thead>
       <tr>
         <th>Region</th>
-        <th>Reported</th>
-        <th>Predicted</th>
+        <th>Disease</th>
+        <th>Category</th>
+        <th>Actual</th>
+        <th>Expected</th>
         <th>Risk</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="dashboardTable">
       <tr>
         <td>Chennai</td>
+        <td>Dengue</td>
+        <td>CONFIRMED</td>
         <td>120</td>
-        <td>85</td>
+        <td>80</td>
         <td class="text-danger">High</td>
       </tr>
     </tbody>
   </table>
 
-  <button class="btn btn-danger">Release Press Update</button>
+  <hr>
+
+  <!-- SECTION 2: REGISTER HOSPITAL -->
+  <h3>Register Hospital</h3>
+
+  <form id="registerHospitalForm">
+    <input type="text" id="hospitalName" class="form-control mt-2" placeholder="Hospital Name" required>
+    <input type="email" id="hospitalEmail" class="form-control mt-2" placeholder="Email" required>
+    <input type="password" id="hospitalPassword" class="form-control mt-2" placeholder="Password" required>
+    <input type="text" id="hospitalRegion" class="form-control mt-2" placeholder="District / Region" required>
+
+    <button type="submit" class="btn btn-primary mt-3">
+      Register Hospital
+    </button>
+  </form>
+
+  <hr>
+
+  <!-- SECTION 3: PRESS RELEASE -->
+  <h3>Publish Press Release</h3>
+
+  <form id="pressForm">
+    <input type="text" id="pressTitle" class="form-control mt-2" placeholder="Title">
+    <textarea id="pressContent" class="form-control mt-2" rows="3"
+      placeholder="Press release content"></textarea>
+
+    <button type="submit" class="btn btn-danger mt-3">
+      Publish
+    </button>
+  </form>
+
 </div>
 
 </body>

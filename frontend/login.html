@@ -6,7 +6,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<!-- NAVBAR -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="index.html">
       PrevAI – Disease Outbreak Early Warning
@@ -38,15 +39,19 @@
 <div class="container mt-5" style="max-width:400px;">
   <h3 class="text-center">Login</h3>
 
-  <input type="email" class="form-control mt-3" placeholder="Email">
-  <input type="password" class="form-control mt-2" placeholder="Password">
+  <form id="loginForm">
+    <input type="email" id="email" class="form-control mt-3" placeholder="Email" required>
+    <input type="password" id="password" class="form-control mt-2" placeholder="Password" required>
 
-  <select class="form-select mt-2">
-    <option>Hospital</option>
-    <option>Health Ministry</option>
-  </select>
+    <select id="role" class="form-select mt-2">
+      <option value="hospital">Hospital</option>
+      <option value="ministry">Health Ministry</option>
+    </select>
 
-  <button class="btn btn-success w-100 mt-3">Login</button>
+    <button type="submit" class="btn btn-success w-100 mt-3">
+      Login
+    </button>
+  </form>
 </div>
 
 </body>
