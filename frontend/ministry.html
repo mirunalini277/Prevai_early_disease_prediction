@@ -13,34 +13,43 @@
 
 <body class="bg-light">
 
-<!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
   <div class="container-fluid px-4">
     <span class="navbar-brand fw-bold">PrevAI – Health Ministry</span>
 
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><button class="nav-link btn btn-link" onclick="showSection('dashboard')">Surveillance</button></li>
-      <li class="nav-item"><button class="nav-link btn btn-link" onclick="showSection('register')">Hospital Registry</button></li>
-      <li class="nav-item"><button class="nav-link btn btn-link" onclick="showSection('press')">Press Release</button></li>
-      <li class="nav-item"><button class="nav-link btn btn-link text-danger" onclick="logout()">Logout</button></li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-link" onclick="showSection('dashboard')">Surveillance</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-link" onclick="showSection('register')">Hospital Registry</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-link" onclick="showSection('press')">Press Release</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-link text-danger" onclick="logout()">Logout</button>
+      </li>
     </ul>
   </div>
 </nav>
 
 <div class="container mt-4">
 
-<!-- ================= DASHBOARD ================= -->
+<!-- ================= DASHBOARD SECTION ================= -->
 <div id="dashboardSection">
 
-  <!-- Context -->
   <div class="mb-4 p-3 bg-white border rounded">
     <h5 class="mb-1">Disease Surveillance Dashboard</h5>
-    <p class="text-muted mb-0">Monitor reported cases and AI-based outbreak predictions</p>
+    <p class="text-muted mb-0">
+      Monitor reported cases and AI-based outbreak predictions
+    </p>
   </div>
 
-  <!-- District -->
+  <!-- District Selector -->
   <label class="fw-semibold mb-1">Select District</label>
-  <select id="districtSelect" class="form-select w-25 mb-3">
+  <select id="districtSelect" class="form-select w-25 mb-3" onchange="loadDistrictData()">
     <option value="">Select District</option>
     <option value="Chennai">Chennai</option>
     <option value="Coimbatore">Coimbatore</option>
@@ -82,7 +91,6 @@
     </div>
   </div>
 
-
   <!-- Table -->
   <table class="table table-bordered bg-white">
     <thead class="table-light">
@@ -95,7 +103,9 @@
         <th>Trend</th>
       </tr>
     </thead>
-    <tbody id="diseaseTable"></tbody>
+    <tbody id="diseaseTable">
+      <!-- Filled by JS -->
+    </tbody>
   </table>
 
   <!-- Chart -->
@@ -107,30 +117,148 @@
 
 </div>
 
-<!-- ================= REGISTER ================= -->
+<!-- ================= REGISTER SECTION ================= -->
 <div id="registerSection" style="display:none;">
   <h4>Register Hospital</h4>
-  <input class="form-control mt-2" placeholder="Hospital Name">
-  <input class="form-control mt-2" placeholder="Email">
-  <input class="form-control mt-2" placeholder="Password">
-  <select class="form-select mt-2">
-    <option>Select District</option>
-    <option>Chennai</option>
-    <option>Coimbatore</option>
-  </select>
-  <button class="btn btn-success mt-3">Register Hospital</button>
+
+  <form id="registerHospitalForm">
+
+    <input
+      id="hospitalEmail"
+      class="form-control mt-2"
+      placeholder="Hospital Email"
+      required
+    >
+
+    <input
+      id="hospitalPassword"
+      class="form-control mt-2"
+      placeholder="Password"
+      required
+    >
+
+    <select id="hospitalRegion" class="form-select mt-2" required>
+      <option value="">Select District</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Coimbatore">Coimbatore</option>
+    </select>
+
+    <button type="submit" class="btn btn-success mt-3">
+      Register Hospital
+    </button>
+
+  </form>
 </div>
 
-<!-- ================= PRESS ================= -->
+<!-- ================= PRESS SECTION ================= -->
 <div id="pressSection" style="display:none;">
   <h4>Publish Press Release</h4>
+
   <input class="form-control mt-2" placeholder="Title">
   <textarea class="form-control mt-2" rows="4" placeholder="Public advisory"></textarea>
-  <button class="btn btn-danger mt-3">Publish</button>
+
+  <button class="btn btn-danger mt-3">
+    Publish
+  </button>
 </div>
 
 </div>
 
-<script src="js/ministry-ui.js"></script>
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+let chartInstance = null;
+
+function showSection(section) {
+  document.getElementById("dashboardSection").style.display = "none";
+  document.getElementById("registerSection").style.display = "none";
+  document.getElementById("pressSection").style.display = "none";
+
+  if (section === "dashboard") {
+    document.getElementById("dashboardSection").style.display = "block";
+  } else if (section === "register") {
+    document.getElementById("registerSection").style.display = "block";
+  } else if (section === "press") {
+    document.getElementById("pressSection").style.display = "block";
+  }
+}
+
+function logout() {
+  window.location.href = "login.html";
+}
+
+/* ===== Dummy Dashboard Data ===== */
+function loadDistrictData() {
+  const table = document.getElementById("diseaseTable");
+  table.innerHTML = "";
+
+  const dummy = [
+    {date:"2024-03-01", disease:"Dengue", reported:120, predicted:80, risk:"High"},
+    {date:"2024-03-08", disease:"Dengue", reported:150, predicted:100, risk:"High"}
+  ];
+
+  dummy.forEach(row => {
+    table.innerHTML += `
+      <tr onclick="showChart('${row.disease}')">
+        <td>${row.date}</td>
+        <td>${row.disease}</td>
+        <td>${row.reported}</td>
+        <td>${row.predicted}</td>
+        <td class="text-danger">${row.risk}</td>
+        <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+      </tr>
+    `;
+  });
+}
+
+/* ===== Chart ===== */
+function showChart(disease) {
+  document.getElementById("chartSection").style.display = "block";
+  document.getElementById("chartTitle").innerText = disease + " Trend";
+
+  const ctx = document.getElementById("trendChart");
+
+  if (chartInstance) chartInstance.destroy();
+
+  chartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
+      datasets: [
+        {
+          label: "Reported Cases",
+          data: [20, 40, 55, 70, 90, 110, 150],
+          borderColor: "red",
+          fill: false
+        },
+        {
+          label: "Predicted Cases",
+          data: [30, 50, 60, 75, 85, 100, 120],
+          borderColor: "blue",
+          fill: false
+        }
+      ]
+    }
+  });
+}
+
+/* ===== Register Hospital ===== */
+document.getElementById("registerHospitalForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("hospitalEmail").value;
+  const password = document.getElementById("hospitalPassword").value;
+  const region = document.getElementById("hospitalRegion").value;
+
+  const response = await fetch("http://127.0.0.1:8000/ministry/register-hospital", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({email, password, region})
+  });
+
+  const data = await response.json();
+  alert(data.message);
+});
+</script>
+
 </body>
 </html>

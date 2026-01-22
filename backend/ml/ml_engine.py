@@ -1,10 +1,6 @@
-def run_analysis(csv_path):
-    """
-    Dummy ML logic.
-    Real Prophet model will come later.
-    """
-    return [
-        {
-            "risk": "High"
-        }
-    ]
+def run_analysis(df):
+    # Placeholder for Prophet + anomaly logic
+    return {
+        "risk": "High",
+        "expected_next_7_days": 180
+    }

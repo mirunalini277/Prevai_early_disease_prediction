@@ -115,51 +115,43 @@
 
 <!-- SCRIPT -->
 <script>
-  // ===============================
-  // Dummy data (frontend only)
-  // ===============================
-  let lastUploadDate = "2026-01-12"; // YYYY-MM-DD (dummy)
+document.getElementById("csvUploadForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
 
-  function daysBetween(date1, date2) {
-    const diffTime = Math.abs(date2 - date1);
-    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const fileInput = document.getElementById("csvFile");
+  const statusBox = document.getElementById("uploadStatus");
+
+  if (!fileInput.files.length) {
+    statusBox.innerText = "Please select a CSV file.";
+    return;
   }
 
-  function checkUploadReminder() {
-    const warningBox = document.getElementById("uploadWarning");
-    const lastDate = new Date(lastUploadDate + "T00:00:00");
-    const today = new Date();
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
 
-    const diffDays = daysBetween(lastDate, today);
+  statusBox.innerText = "Uploading CSV…";
 
-    if (diffDays > 7) {
-      warningBox.classList.remove("d-none");
-      warningBox.innerText =
-        `Data must be uploaded once every 7 days. Last submission was ${diffDays} days ago.`;
+  try {
+    const response = await fetch("http://127.0.0.1:8000/hospital/upload-csv", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.status === "success") {
+      statusBox.innerText =
+        `Upload successful. ${data.rows_inserted} aggregated rows stored.`;
     } else {
-      warningBox.classList.add("d-none");
+      statusBox.innerText = "Upload failed: " + data.message;
     }
+
+  } catch (err) {
+    statusBox.innerText = "Backend not reachable. Is FastAPI running?";
   }
-
-  // Run on page load
-  checkUploadReminder();
-
-  // ===============================
-  // CSV Upload (demo mode)
-  // ===============================
-  document.getElementById("csvUploadForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    document.getElementById("uploadStatus").innerText =
-      "CSV uploaded successfully. Data sent for analysis.";
-
-    // Update dummy upload date to today
-    lastUploadDate = new Date().toISOString().split("T")[0];
-
-    // Re-check reminder
-    checkUploadReminder();
-  });
+});
 </script>
+
 
 </body>
 </html>

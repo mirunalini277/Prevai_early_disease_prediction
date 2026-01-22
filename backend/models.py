@@ -1,12 +1,22 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date
 from backend.database import Base
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-
-    email = Column(String(255), unique=True, index=True)
-    password = Column(String(255), nullable=False)
-    role = Column(String(50), nullable=False)
+    id = Column(Integer, primary_key=True)
+    email = Column(String(255), unique=True)
+    password = Column(String(255))
+    role = Column(String(50))
     region = Column(String(100))
+
+class HospitalRecord(Base):
+    __tablename__ = "hospital_records"
+
+    id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    region = Column(String(100))
+    syndrome = Column(String(100))
+    disease = Column(String(100))
+    admissions = Column(Integer)
+    icu_occupancy = Column(Integer)
