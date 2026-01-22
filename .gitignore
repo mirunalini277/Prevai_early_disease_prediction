@@ -11,3 +11,10 @@ saved_models/
 
 # Accidental nested folder
 ml_pipeline/prediction_model/ml_pipeline/
+# Python cache
+__pycache__/
+*.pyc
+
+# ML model files
+*.pkl
+models/

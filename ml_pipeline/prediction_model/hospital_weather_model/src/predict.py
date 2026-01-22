@@ -1,11 +1,11 @@
-import joblib
-import pandas as pd
-from config import MODEL_PATH
+from predict import predict_patient_count
 
-def predict_patients(weather_input):
-    model = joblib.load(MODEL_PATH)
+sample_input = {
+    "beds_available": 120,
+    "staff_count": 45,
+    "temperature": 32,
+    "humidity": 60,
+    "rainfall": 5
+}
 
-    df = pd.DataFrame([weather_input])
-    prediction = model.predict(df)
-
-    print("🔮 Predicted patient count:", int(prediction[0]))
+print(predict_patient_count(sample_input))
