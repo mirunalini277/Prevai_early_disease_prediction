@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date
 from backend.database import Base
+from sqlalchemy import Column, Integer, String, Text, Enum, TIMESTAMP
+import datetime
 
 class User(Base):
     __tablename__ = "users"
@@ -20,3 +22,14 @@ class HospitalRecord(Base):
     disease = Column(String(100))
     admissions = Column(Integer)
     icu_occupancy = Column(Integer)
+
+
+class PressRelease(Base):
+    __tablename__ = "press_releases"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(255))
+    content = Column(Text)
+    risk = Column(Enum("High","Medium","Normal"))
+    created_at = Column(TIMESTAMP, default=datetime.datetime.utcnow)
+

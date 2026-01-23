@@ -45,12 +45,6 @@
           placeholder="Password"
           required
         >
-
-        <select id="role" class="form-select mb-4">
-          <option value="hospital">Hospital</option>
-          <option value="ministry">Health Ministry</option>
-        </select>
-
         <button type="submit" class="btn btn-success w-100">
           Login
         </button>
@@ -84,12 +78,17 @@ async function loginUser(event) {
     const data = await response.json();
 
     if (data.status === "success") {
-      if (data.role === "ministry") {
-        window.location.href = "ministry.html";
-      } else {
-        window.location.href = "hospital.html";
-      }
-    } else {
+
+  localStorage.setItem("role", data.role);
+  localStorage.setItem("email", data.email);
+  localStorage.setItem("region", data.region);
+
+  if (data.role === "ministry") {
+    window.location.href = "ministry.html";
+  } else {
+    window.location.href = "hospital.html";
+  }
+}else {
       alert("Invalid email or password");
     }
 

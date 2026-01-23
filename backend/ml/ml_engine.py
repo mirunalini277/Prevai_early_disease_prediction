@@ -1,6 +1,6 @@
-def run_analysis(df):
-    # Placeholder for Prophet + anomaly logic
-    return {
-        "risk": "High",
-        "expected_next_7_days": 180
-    }
+from backend.ml.forecast import run_forecast
+from backend.ml.anomaly import run_anomaly
+
+def run_pipeline():
+    run_forecast()
+    run_anomaly()

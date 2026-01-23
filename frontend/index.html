@@ -44,6 +44,7 @@
   </div>
 </section>
 
+
 <!-- SECTION: WHY PREVAI -->
 <section class="info-section glass-section">
   <div class="container">
@@ -110,6 +111,32 @@
 <footer class="footer">
   <p>© 2026 PrevAI – Public Health Intelligence Platform</p>
 </footer>
+<script>
+async function loadLatestPress() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/press");
+    const data = await res.json();
+
+    if (!data.length) return;
+
+    const p = data[0];
+
+    document.getElementById("latestPress").innerHTML = `
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5>${p.title}</h5>
+          <p>${p.content}</p>
+          <small class="text-muted">${p.date}</small>
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+loadLatestPress();
+</script>
 
 </body>
 </html>

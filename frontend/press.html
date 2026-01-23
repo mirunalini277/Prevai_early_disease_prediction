@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Public Health Updates – PrevAI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Optional custom CSS -->
   <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top border-bottom">
   <div class="container-fluid px-4">
 
     <a class="navbar-brand fw-bold" href="index.html">PrevAI</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -25,11 +37,12 @@
           <a class="nav-link" href="index.html">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="press.html">Public Health Updates</a>
+          <a class="nav-link active" href="press.html">
+            Public Health Updates
+          </a>
         </li>
       </ul>
 
-      <!-- Login Button -->
       <a href="login.html" class="btn btn-outline-primary">
         Login
       </a>
@@ -38,25 +51,60 @@
   </div>
 </nav>
 
+<!-- ================= CONTENT ================= -->
 <div class="container mt-5 pt-4">
   <h3>Public Health Updates</h3>
   <p class="text-muted">
     Verified advisories issued by health authorities.
   </p>
 
-  <div class="card mt-4">
-    <div class="card-body">
-      <h5>Dengue Advisory – Chennai District</h5>
-      <p>
-        Increased dengue activity detected. Citizens are advised
-        to eliminate stagnant water and seek medical attention
-        if symptoms occur.
-      </p>
-      <span class="badge bg-danger">High Risk</span>
-    </div>
-  </div>
+  <!-- Press cards will be injected here -->
+  <div id="pressContainer"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ================= JS ================= -->
+<script>
+async function loadPress() {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/press");
+    const data = await response.json();
+
+    const container = document.getElementById("pressContainer");
+    container.innerHTML = "";
+
+    if (data.length === 0) {
+      container.innerHTML =
+        "<p class='text-muted'>No public advisories available.</p>";
+      return;
+    }
+
+    data.forEach(item => {
+      container.innerHTML += `
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">${item.title}</h5>
+            <p class="card-text">${item.content}</p>
+            <small class="text-muted">
+              Published on ${item.date}
+            </small>
+          </div>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Failed to load press releases:", error);
+    document.getElementById("pressContainer").innerHTML =
+      "<p class='text-danger'>Unable to load updates.</p>";
+  }
+}
+
+loadPress();
+</script>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</script>
+
 </body>
 </html>

@@ -39,13 +39,15 @@
 
 <!-- ================= DASHBOARD SECTION ================= -->
 <div id="dashboardSection">
+<div class="mb-4 p-3 bg-white border rounded position-relative">
+  <span class="position-absolute top-0 start-0 h-100"
+        style="width:6px; background:#198754; border-radius:6px 0 0 6px;"></span>
 
-  <div class="mb-4 p-3 bg-white border rounded">
-    <h5 class="mb-1">Disease Surveillance Dashboard</h5>
-    <p class="text-muted mb-0">
-      Monitor reported cases and AI-based outbreak predictions
-    </p>
-  </div>
+  <h5 class="mb-1 text-success">Disease Surveillance Dashboard</h5>
+  <p class="text-muted mb-0">
+    Monitor reported cases and AI-based outbreak predictions
+  </p>
+</div>
 
   <!-- District Selector -->
   <label class="fw-semibold mb-1">Select District</label>
@@ -53,43 +55,9 @@
     <option value="">Select District</option>
     <option value="Chennai">Chennai</option>
     <option value="Coimbatore">Coimbatore</option>
+    <option value="Madurai">Madurai</option>
   </select>
 
-  <!-- Filters -->
-  <div class="card mb-3">
-    <div class="card-body">
-      <div class="row g-3">
-
-        <div class="col-md-3">
-          <label class="form-label fw-semibold">Disease</label>
-          <select id="diseaseFilter" class="form-select">
-            <option value="">All</option>
-          </select>
-        </div>
-
-        <div class="col-md-3">
-          <label class="form-label fw-semibold">Risk Level</label>
-          <select id="riskFilter" class="form-select">
-            <option value="">All</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Normal">Normal</option>
-          </select>
-        </div>
-
-        <div class="col-md-3">
-          <label class="form-label fw-semibold">From Date</label>
-          <input type="date" id="fromDate" class="form-control">
-        </div>
-
-        <div class="col-md-3">
-          <label class="form-label fw-semibold">To Date</label>
-          <input type="date" id="toDate" class="form-control">
-        </div>
-
-      </div>
-    </div>
-  </div>
 
   <!-- Table -->
   <table class="table table-bordered bg-white">
@@ -154,10 +122,23 @@
 <div id="pressSection" style="display:none;">
   <h4>Publish Press Release</h4>
 
-  <input class="form-control mt-2" placeholder="Title">
-  <textarea class="form-control mt-2" rows="4" placeholder="Public advisory"></textarea>
+  <input
+    id="pressTitle"
+    class="form-control mt-2"
+    placeholder="Title"
+  >
 
-  <button class="btn btn-danger mt-3">
+  <textarea
+    id="pressContent"
+    class="form-control mt-2"
+    rows="4"
+    placeholder="Public advisory"
+  ></textarea>
+
+  <button
+    class="btn btn-danger mt-3"
+    onclick="publishPress()"
+  >
     Publish
   </button>
 </div>
@@ -258,6 +239,35 @@ document.getElementById("registerHospitalForm").addEventListener("submit", async
   const data = await response.json();
   alert(data.message);
 });
+</script>
+<script>
+async function publishPress() {
+  const title = document.getElementById("pressTitle").value;
+  const content = document.getElementById("pressContent").value;
+
+  if (!title || !content) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/press", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, content })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+
+    document.getElementById("pressTitle").value = "";
+    document.getElementById("pressContent").value = "";
+
+  } catch (err) {
+    alert("Error publishing press");
+    console.error(err);
+  }
+}
 </script>
 
 </body>
